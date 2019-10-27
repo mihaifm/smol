@@ -1,0 +1,7 @@
+node_modules/*
+release/*
+source/*
+public/*
+db/*
+prep.bat
+checklist.txt
