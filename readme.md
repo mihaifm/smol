@@ -55,6 +55,7 @@ Alternate installation (that doesn't require the global `smol` command):
 
     git clone https://github.com/mihaifm/smol blog
     cd blog
+    npm install
     export SMOL_VAULT_PASSWORD=yourpassword
     node index.js
 
