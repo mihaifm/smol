@@ -65,7 +65,7 @@ Now simply visit `localhost:3939` to view your blog and `localhost:3939/admin` t
 
 ###  Authentication
 
-Smol provides a single user that is created when visiting `/admin`. User data is stored in a text called `vault.txt` which is encrypted with the password available in the 
+Smol provides a single user that is created when visiting `/admin`. User data is stored in a text file called `vault.txt` which is encrypted with the password available in the 
 SMOL_VAULT_PASSWORD environment variable. User password is hashed with sha512.
 
 ### Markdown editing
@@ -92,8 +92,8 @@ It is recommended to make a copy of the default theme and naming it to something
 
 #### Environment variables
 
-* __SMOL_VAULT_PASSWORD__ -  encryption password for the "vault" containing user data. See authentication
-* __SMOL_PORT__ - server port
+* __SMOL_VAULT_PASSWORD__ -  encryption password for the "vault" containing user data. See [authentication](https://github.com/mihaifm/smol#authentication)
+* __SMOL_PORT__ - server port. Default: `3939`
 * __SMOL_SRC_PATH__ - path to the markdown page sources. Default: `source`
 * __SMOL_OUTPUT_PATH__ - path to the generated static files. Default: `public`
 * __SMOL_VAULT_PATH__ - path to the vault. Default: `db`
