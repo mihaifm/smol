@@ -88,6 +88,11 @@ Themes are based on [ejs](https://ejs.co/) templates and are placed in the `them
 panel.     
 It is recommended to make a copy of the default theme and naming it to something else before making and customizations to the site. This way you won't lose any changes when updating Smol.
 
+### RSS
+
+RSS feed is generated automatically for the entire site. RSS fields can be configured by editing `feedconfig.json`. This file is generated with some placeholder values when the server
+is first started.
+
 ## Config
 
 #### Environment variables
