@@ -36,7 +36,7 @@ var app = express();
 
 app.set('views', `themes/${config.theme}/views`);
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
+app.use(express.static(builder.dirs.out));
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({
   secret: process.env['SMOL_SESSION_SECRET'] || utils.randomString(16),
@@ -132,13 +132,13 @@ app.post('/:slug/save', ensureLogin(), (req, res) => {
 })
 
 app.post('/:slug/comments', (req, res) => {
-  var filename = `${builder.dirs.db}/${req.params.slug}/comments.json`;
+  var filename = `${builder.dirs.data}/${req.params.slug}/comments.json`;
   var comments = [];
   if (fs.existsSync(filename)) {
     comments = JSON.parse(fs.readFileSync(filename));
   }
   else {
-    fs.mkdirSync(`${builder.dirs.db}/${req.params.slug}`);
+    fs.mkdirSync(`${builder.dirs.data}/${req.params.slug}`);
     fs.writeFileSync(filename, "[]");
   }
 

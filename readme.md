@@ -1,6 +1,6 @@
 # Smol
 
-Smol is a small website builder. It aims to be an alternative to the unnecessarily complex static site generators and content managers available today.
+Smol is a small website builder. It aims to be an alternative to the increasingly complex static site generators and content managers available today.
 
 With Smol you would just write your posts in markdown using the built-in online editor. The markdown content is saved on the disk and converted to html on the spot.
 No database is required, everything is file based.    
@@ -56,8 +56,8 @@ Now simply visit `localhost:3939` to view your blog and `localhost:3939/admin` t
 
 ###  Authentication
 
-Smol provides a single user that is created when visiting `/admin`. User data is stored in a text file called `vault.txt` which is encrypted with the password available in the 
-SMOL_VAULT_PASSWORD environment variable. User password is hashed with sha512.
+Smol provides a single user that is created when visiting `/admin`. User data is stored in a text file `(data/vault.txt`) which is encrypted with the password available in the 
+SMOL_VAULT_PASSWORD environment variable. User password is also hashed with sha512.
 
 ### Markdown editing
 
@@ -81,7 +81,7 @@ It is recommended to make a copy of the default theme and naming it to something
 
 ### Images
 
-Images can be uploaded via the `media` link in the admin panel. New images are stored in `source/media` and copied to `public/media` when the site in generated.
+Images can be uploaded via the `/media` link (or from the admin panel). New images are stored in `source/media` and copied to `public/media` when the site in generated.
 
 ### RSS
 
@@ -96,11 +96,11 @@ is first started.
 * __SMOL_PORT__ - server port. Default: `3939`
 * __SMOL_SRC_PATH__ - path to the markdown page sources. Default: `source`
 * __SMOL_OUTPUT_PATH__ - path to the generated static files. Default: `public`
-* __SMOL_VAULT_PATH__ - path to the vault. Default: `db`
+* __SMOL_DATA_PATH__ - path to the data folder. Default: `data`
 
 #### Site metadata
 
-A smol number of options like site title and description are available in the `config.json` file (stored in the `SMOL_VAULT_PATH` folder). 
+A smol number of options like site title and description are available in the `config.json` file (stored in the `data` folder).
 You can edit the file manually or use the `/settings` panel of your website.
 
 
