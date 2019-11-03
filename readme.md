@@ -14,6 +14,7 @@ Smol uses a node.js server to provide some dynamic content like comments, image 
 * All content statically generated
 * No database
 * Online markdown editor
+* Image resize and optimization
 * Extremely lightweight
 
 ## FAQ
@@ -30,16 +31,6 @@ Compared to an SSG, Smol provides an online markdown editor so you can edit your
 Smol is very similar to a CMS, in the sense that you can manage your content from an online interface. However it is smaller, much smaller than a real CMS like Wordpress.
 
 With Smol all posts sit nicely on the disk written in Markdown and are not deeply burried inside a database. In fact Smol does not even require a database.
-
-### What components does Smol use under the hood ?
-
-Smol uses the following open source projects:
-
-* [Express](https://expressjs.com/) for routes
-* [Passport](http://www.passportjs.org/) for authentication
-* [ejs](https://ejs.co/) for templating
-* [marked](https://github.com/markedjs/marked) for markdown to html conversion
-* [simplemde](https://simplemde.com/) for markdown editing
 
 ## Getting started
 
@@ -87,6 +78,10 @@ There is no anti-spam protection so use it at your own risk. However it should b
 Themes are based on [ejs](https://ejs.co/) templates and are placed in the `themes` folder. Smol has a default theme called `tiny`. Changing the theme can be done in the `/settings`
 panel.     
 It is recommended to make a copy of the default theme and naming it to something else before making and customizations to the site. This way you won't lose any changes when updating Smol.
+
+### Images
+
+Images can be uploaded via the `media` link in the admin panel. New images are stored in `source/media` and copied to `public/media` when the site in generated.
 
 ### RSS
 

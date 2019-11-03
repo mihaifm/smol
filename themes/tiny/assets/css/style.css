@@ -59,6 +59,8 @@ blockquote {
   border-left: 3px solid #1d61b9; }
 
 img {
+  display: block;
+  margin: auto;
   max-width: 100%; }
 
 code, pre {
@@ -159,7 +161,7 @@ legend, fieldset {
   display: block;
   margin-bottom: .5rem;
   font-weight: 600;
-  width: 40%; }
+  width: 50%; }
 
 label {
   margin-bottom: .5rem;
@@ -226,4 +228,27 @@ input[type=submit] {
   font-size: 0.9em; }
 
 .new-post fieldset {
-  width: 75%; }
+  width: 50%; }
+
+.image-resize input[type=checkbox] {
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+  margin: -.2em .5em 0 0;
+}
+
+.image-resize label {
+  display: inline-block;
+  font-size: 1.4rem;
+}
+
+.image-resize label:first-child {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.image-resize input[type=text] {
+  display: inline-block;
+  width: 50px;
+  margin-right: 10px;
+}
