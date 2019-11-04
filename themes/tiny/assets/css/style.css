@@ -229,26 +229,3 @@ input[type=submit] {
 
 .new-post fieldset {
   width: 50%; }
-
-.image-resize input[type=checkbox] {
-  display: inline-block;
-  vertical-align: middle;
-  width: auto;
-  margin: -.2em .5em 0 0;
-}
-
-.image-resize label {
-  display: inline-block;
-  font-size: 1.4rem;
-}
-
-.image-resize label:first-child {
-  margin-right: 10px;
-  margin-left: 10px;
-}
-
-.image-resize input[type=text] {
-  display: inline-block;
-  width: 50px;
-  margin-right: 10px;
-}

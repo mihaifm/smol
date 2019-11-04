@@ -3,5 +3,6 @@ release/*
 source/*
 public/*
 db/*
+data/*
 prep.bat
 checklist.txt

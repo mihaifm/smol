@@ -3,8 +3,7 @@ const express = require('express');
 const passport = require('passport');
 const Strategy = require('passport-local').Strategy;
 const ensureLogin = require('connect-ensure-login').ensureLoggedIn;
-const multer = require('multer')();
-const sharp = require('sharp');
+const formidable = require('formidable');
 const users = require('./lib/users.js');
 const builder = require('./lib/builder.js');
 const utils = require('./lib/utils.js');
@@ -131,24 +130,6 @@ app.post('/:slug/save', ensureLogin(), (req, res) => {
   res.redirect("/" + req.params.slug);
 })
 
-app.post('/:slug/comments', (req, res) => {
-  var filename = `${builder.dirs.data}/${req.params.slug}/comments.json`;
-  var comments = [];
-  if (fs.existsSync(filename)) {
-    comments = JSON.parse(fs.readFileSync(filename));
-  }
-  else {
-    fs.mkdirSync(`${builder.dirs.data}/${req.params.slug}`);
-    fs.writeFileSync(filename, "[]");
-  }
-
-  comments.push({name: req.body.name, text: req.body.text, id: Date.now()})
-  fs.writeFileSync(filename, JSON.stringify(comments));
-
-  builder.buildPage(`${req.params.slug}.md`);
-  res.redirect("/" + req.params.slug + "#comments");
-})
-
 app.get('/media', ensureLogin(), (req, res) => {
   var images = [];
   fs.readdirSync(`${builder.dirs.src}/media/`).forEach(file=> {
@@ -158,31 +139,21 @@ app.get('/media', ensureLogin(), (req, res) => {
   res.render('media', Object.assign({user: req.user, images}, builder.getConfig()));
 })
 
-app.post('/upload', ensureLogin(), multer.single('image'), function (req, res){
-  var imagePath = `${builder.dirs.src}/media/${req.file.originalname}`;
+app.post('/upload', ensureLogin(), function (req, res){
+  var form = new formidable.IncomingForm();
+  form.parse(req);
 
-  var w = req.body.width ? parseInt(req.body.width) : null;
-  var h = req.body.height ? parseInt(req.body.height) : null;
+  form.on('fileBegin', function (name, file){
+      file.path = `${builder.dirs.src}/media/${file.name}`;
+  });
 
-  if (req.body.resize) {
-    sharp(req.file.buffer).resize(w, h, { 
-      fit: sharp.fit.inside, 
-      withoutEnlargement: true 
-    }).toFile(imagePath, (err, info) => {
-      fs.copyFile(imagePath, `${builder.dirs.out}/media/${req.file.originalname}`, (err) => {
+  form.on('file', function (name, file){
+      fs.copyFile(file.path, `${builder.dirs.out}/media/${file.name}`, (err)=>{
         if (err) throw err;
       });
+  });
 
-      res.redirect('/media');
-    });
-  } else {
-    fs.writeFileSync(imagePath, req.file.buffer);
-    fs.copyFile(imagePath, `${builder.dirs.out}/media/${req.file.originalname}`, (err) => {
-      if (err) throw err;
-    });
-
-    res.redirect('/media');
-  }
+  res.redirect('/media');
 });
 
 builder.build();
