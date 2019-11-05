@@ -8,7 +8,7 @@ function cliProcess(input) {
     builder.makeApp();
   }
   else if (command == 'start') {
-    require('child_process').execSync('node index.js');
+    require('child_process').fork('index.js');
   } 
   else if (command == 'build') {
     builder.build();
