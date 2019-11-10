@@ -7,7 +7,10 @@ const formidable = require('formidable');
 const users = require('./lib/users.js');
 const builder = require('./lib/builder.js');
 const utils = require('./lib/utils.js');
-const config = builder.getConfig();
+
+// Build the static site first
+builder.build();
+var config = builder.getConfig();
 
 // Configure the local strategy for Passport
 passport.use(new Strategy(function(username, password, cb) {
@@ -99,7 +102,9 @@ app.get('/settings', ensureLogin(), (req, res) => {
 app.post('/settings', ensureLogin(), (req, res) => {
   var status = builder.setConfig(req.body);
   builder.build();
-  var viewData = Object.assign({user: req.user}, builder.getConfig());
+  config = builder.getConfig();
+  app.set('views', `themes/${config.theme}/views`);
+  var viewData = Object.assign({user: req.user}, config);
   viewData.message = status;
   res.render('settings', viewData);
 });
@@ -160,8 +165,6 @@ app.post('/upload', ensureLogin(), function (req, res){
 
   res.redirect('/media');
 });
-
-builder.build();
 
 var listener = app.listen(process.env['SMOL_PORT'] || 3939, () => {
   console.log(`Server started on port ${listener.address().port}`)
