@@ -29,7 +29,7 @@
     "glob": "7.1.4",
     "ejs": "2.7.1",
     "front-matter": "3.0.2",
-    "marked": "0.7.0",
+    "marked": "4.0.10",
     "formidable": "1.2.1"
   }
 }
